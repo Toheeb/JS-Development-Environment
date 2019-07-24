@@ -1,26 +1,24 @@
+// This is not for production use
+// It is just to See how Distribution will look like
 
 import express from 'express';
 import path from 'path';
 import open from 'open';
+import compression from 'compression';
 
 /* eslint-disable no-console */
 
 const port = 3000;
 const app = express();
 
-// Serve the webpack bundle
-import webpack from 'webpack';
-import config from '../webpack.config.dev';
+app.use(express.static('dist'));
 
-const compiler = webpack(config);
-
-app.use(require('webpack-dev-middleware')(compiler, {
-  noInfo: true,
-  publicPath: config.output.publicPath
-}));
+// Use compression to see file Size that will be sent over wire
+// Enable GZIP
+app.use(compression());
 
 app.get('/', function(req, res){
-  res.sendFile(path.join(__dirname, '../src/index.html'));
+  res.sendFile(path.join(__dirname, '../dist/index.html'));
 });
 
 app.get('/users', function(req, res) {

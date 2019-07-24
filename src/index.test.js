@@ -6,7 +6,7 @@ describe('First Test', () => {
   it('should pass', () => {
     expect(true).to.equal(true);
   })
-})
+});
 
 
 describe('index.html', () => {
@@ -15,7 +15,7 @@ describe('index.html', () => {
 
     jsdom.env(index, function(err, window) {
       const h1 = window.document.getElementsByTagName('h1')[0];
-      expect(h1.innerHTML).to.equal("Hello world!");
+      expect(h1.innerHTML).to.equal("Users");
 
       // set it to be asynchronous
       done();
@@ -23,4 +23,4 @@ describe('index.html', () => {
       window.close();
     })
   })
-})
+});
