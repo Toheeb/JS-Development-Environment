@@ -1,3 +1,5 @@
+import './style.css';
+
 const dependency = require('./dependency');
 
 console.log('Logging from index.js');

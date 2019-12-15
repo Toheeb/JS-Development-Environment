@@ -9,7 +9,7 @@ NB: The kit leverages on the use of NPM packages hence the need of Node v8 and i
 ## Table of Content
 The starter kit helps to:
 - [Enforce settings across editors](#enforce-settings-across-editors)
-- [Bundle JS Files](#bundle-js-files)
+- [Bundle Files](#bundle-files)
 - [Enable support for latest JS features](#enable-support-for-latest-js-Features)
 - [Automate Tasks](#automate-tasks)
 
@@ -22,8 +22,9 @@ This is done through [Editor Config](editorconfig.org)
 - Force hard line wrapping after 75 characters for editors that supports it.
 See [EditorConfig Properties](https://github.com/editorconfig/editorconfig/wiki/EditorConfig-Properties)
 
-### Bundle JS Files
-[Web[ack](https://webpack.js.org/) is configured to bundle JS files (and its dependency graph) into one for distribution on the web
+### Bundle Files
+- [Web[ack](https://webpack.js.org/) is configured to bundle JS files (and its dependency graph) into one for distribution on the web
+- Mini CSS Extract Plugin and CSS loader are integrated into webpack to allow for bundling of stylesheet into their own files in the distribution directory
 
 ### Enable Support for Latest JS Features
 To achieve this, [Babel](https://babeljs.io) is configured to transpile JS syntax to es5. Polyfilling is done with the use of [CoreJS](https://github.com/zloirock/core-js)
