@@ -1,0 +1,29 @@
+{
+  "name": "js-development-environment",
+  "version": "1.0.0",
+  "description": "A starter kit for web development",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Toheeb/JS-Development-Environment.git"
+  },
+  "keywords": [
+    "js",
+    "blog",
+    "web",
+    "development"
+  ],
+  "author": "Toheeb Ogunbiyi",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Toheeb/JS-Development-Environment/issues"
+  },
+  "homepage": "https://github.com/Toheeb/JS-Development-Environment#readme",
+  "devDependencies": {
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.10"
+  }
+}
