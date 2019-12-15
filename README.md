@@ -10,6 +10,8 @@ NB: The kit leverages on the use of NPM packages hence the need of Node v8 and i
 The starter kit helps to:
 - [Enforce settings across editors](#enforce-settings-across-editors)
 - [Bundle JS Files](#bundle-js-files)
+- [Enable support for latest JS features](#enable-support-for-latest-js-Features)
+- [Automate Tasks](#automate-tasks)
 
 ### Enforce settings across editors
 The following settings are enforced on Code Editors that will be used for this project files.
@@ -22,3 +24,10 @@ See [EditorConfig Properties](https://github.com/editorconfig/editorconfig/wiki/
 
 ### Bundle JS Files
 [Web[ack](https://webpack.js.org/) is configured to bundle JS files (and its dependency graph) into one for distribution on the web
+
+### Enable Support for Latest JS Features
+To achieve this, [Babel](https://babeljs.io) is configured to transpile JS syntax to es5. Polyfilling is done with the use of [CoreJS](https://github.com/zloirock/core-js)
+
+### Automate Tasks
+Task automation is done with NPM Scripts. Example:
+- To Build the app for development use ```npm run build:dev```; or production, use ```npm run build:prod```
