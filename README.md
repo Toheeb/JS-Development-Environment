@@ -26,6 +26,7 @@ See [EditorConfig Properties](https://github.com/editorconfig/editorconfig/wiki/
 - [Web[ack](https://webpack.js.org/) is configured to bundle JS files (and its dependency graph) into one for distribution on the web
 - Mini CSS Extract Plugin and CSS loader are integrated into webpack to allow for bundling of stylesheet into their own files in the distribution directory
 - Support for Sass Files using node-sass and sass-loader of webpack
+- Supports Multiple Page Apps using Multiple entries and HTML Webpack Plugin
 
 ### Enable Support for Latest JS Features
 To achieve this, [Babel](https://babeljs.io) is configured to transpile JS syntax to es5. Polyfilling is done with the use of [CoreJS](https://github.com/zloirock/core-js)
