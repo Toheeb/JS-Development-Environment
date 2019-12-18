@@ -1,17 +1,15 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 module.exports = {
     entry: {
-        main: [ "./src/index.js" ],
-        app: "./src/app.js"
+        theme: [ "./src/theme/index.js" ]
     },
     output: {
         filename: "[name].bundle.js",
         path: path.resolve(__dirname, 'dist')
-        // filename: "./dist/[name].bundle.js"
     },
     target: 'web',
     module: {
@@ -34,23 +32,15 @@ module.exports = {
         ]
     },
     plugins: [
-        new MiniCssExtractPlugin(),
+        new CleanWebpackPlugin(),
         new HtmlWebpackPlugin({
             hash: true,
-            filename: 'main.html',
+            filename: 'homepage.html',
             template: './src/index.html',
             title: "Toheeb's Blog",
-            toheeb: 'Custom for Toheeb',
-            // chunks by default means all js files.
-            chunks: ["main"]
+            toheeb: 'Custom for Toheeb'
         }),
-        new HtmlWebpackPlugin({
-            hash: true,
-            filename: 'app.html',
-            template: './src/app.html',
-            // title: "Toheeb's Blog",
-            chunks: ["app"]
-        })
+        new MiniCssExtractPlugin()
 
     ]
 }
