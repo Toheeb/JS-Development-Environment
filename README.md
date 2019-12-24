@@ -12,6 +12,7 @@ The starter kit helps to:
 - [Bundle Files](#bundle-files)
 - [Enable support for latest JS features](#enable-support-for-latest-js-Features)
 - [Automate Tasks](#automate-tasks)
+- [Enforce JS Style Guides](#enforce-js-style-guides)
 
 ### Enforce settings across editors
 The following settings are enforced on Code Editors that will be used for this project files.
@@ -23,7 +24,7 @@ This is done through [Editor Config](editorconfig.org)
 See [EditorConfig Properties](https://github.com/editorconfig/editorconfig/wiki/EditorConfig-Properties)
 
 ### Bundle Files
-- [Web[ack](https://webpack.js.org/) is configured to bundle JS files (and its dependency graph) into one for distribution on the web
+- [Webpack](https://webpack.js.org/) is configured to bundle JS files (and its dependency graph) into one for distribution on the web
 - Mini CSS Extract Plugin and CSS loader are integrated into webpack to allow for bundling of stylesheet into their own files in the distribution directory
 - Support for Sass Files using node-sass and sass-loader of webpack
 - Supports Multiple Page Apps using Multiple entries and HTML Webpack Plugin
@@ -34,3 +35,6 @@ To achieve this, [Babel](https://babeljs.io) is configured to transpile JS synta
 ### Automate Tasks
 Task automation is done with NPM Scripts. Example:
 - To Build the app for development use ```npm run build:dev```; or production, use ```npm run build:prod```
+
+### Enforce JS Style Guides
+- To ensure consistency and best practices [AirBnB Javascript Style Guide](https://github.com/airbnb/javascript/blob/master/README.md)

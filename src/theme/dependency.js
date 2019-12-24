@@ -1,3 +1,3 @@
 module.exports = {
-    'message': 'Logging from a dependency file'
-}
+  message: 'Logging from a dependency file',
+};
