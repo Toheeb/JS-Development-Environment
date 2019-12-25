@@ -12,6 +12,9 @@ module.exports = {
         path: path.resolve(__dirname, 'dist')
     },
     target: 'web',
+    devServer: {
+        contentBase: path.resolve(__dirname, 'dist'),
+    },
     module: {
         rules: [
             {
@@ -53,7 +56,7 @@ module.exports = {
         new CleanWebpackPlugin(),
         new HtmlWebpackPlugin({
             hash: true,
-            filename: 'homepage.html',
+            filename: 'index.html',
             template: './src/index.html',
             title: "Toheeb's Blog",
             toheeb: 'Custom for Toheeb'

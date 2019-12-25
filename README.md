@@ -35,7 +35,7 @@ See [EditorConfig Properties](https://github.com/editorconfig/editorconfig/wiki/
 
 ### Automate Tasks
 Task automation is done with NPM Scripts. Example:
-- To Build the app for development use ```npm run build:dev```; or production, use ```npm run build:prod```
+- To Build the app for development use ```npm run build:dev```; or production, use ```npm run build:prod```. Same command can also be used to launch a dev server with Hot Module Replacement
 
 ### Enforce JS Style Guides
 - To ensure consistency and best practices [AirBnB Javascript Style Guide](https://github.com/airbnb/javascript/blob/master/README.md)
