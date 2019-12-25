@@ -29,6 +29,23 @@ module.exports = {
                     "css-loader",
                     "sass-loader"
                 ]
+            },
+            {
+                test: /\.(png|svg|jpg|gif)$/,
+                use: [
+                    {
+                        loader: 'file-loader',
+                        options: {
+                            esModule: false
+                        }
+                    }
+                ]
+            },
+            {
+                test: /\.html$/,
+                use: [
+                    'html-loader'
+                ]
             }
         ]
     },

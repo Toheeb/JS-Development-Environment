@@ -10,7 +10,7 @@ NB: The kit leverages on the use of NPM packages hence the need of Node v8 and i
 The starter kit helps to:
 - [Enforce settings across editors](#enforce-settings-across-editors)
 - [Bundle Files](#bundle-files)
-- [Enable support for latest JS features](#enable-support-for-latest-js-Features)
+- [Support](#supports)
 - [Automate Tasks](#automate-tasks)
 - [Enforce JS Style Guides](#enforce-js-style-guides)
 
@@ -29,8 +29,9 @@ See [EditorConfig Properties](https://github.com/editorconfig/editorconfig/wiki/
 - Support for Sass Files using node-sass and sass-loader of webpack
 - Supports Multiple Page Apps using Multiple entries and HTML Webpack Plugin
 
-### Enable Support for Latest JS Features
-To achieve this, [Babel](https://babeljs.io) is configured to transpile JS syntax to es5. Polyfilling is done with the use of [CoreJS](https://github.com/zloirock/core-js)
+### Supports
+- Latest JS Features. This is done by using [Babel](https://babeljs.io) to transpile JS syntax to es5. Polyfilling is done with the use of [CoreJS](https://github.com/zloirock/core-js)
+- Images (.png, .jpg, .gif, .svg)
 
 ### Automate Tasks
 Task automation is done with NPM Scripts. Example:
