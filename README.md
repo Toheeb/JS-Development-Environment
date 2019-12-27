@@ -32,6 +32,7 @@ See [EditorConfig Properties](https://github.com/editorconfig/editorconfig/wiki/
 ### Supports
 - Latest JS Features. This is done by using [Babel](https://babeljs.io) to transpile JS syntax to es5. Polyfilling is done with the use of [CoreJS](https://github.com/zloirock/core-js)
 - Images (.png, .jpg, .gif, .svg)
+- Web Server with the use of Webpack Web Server
 
 ### Automate Tasks
 Task automation is done with NPM Scripts. Example:
