@@ -14,3 +14,15 @@ Array.from(array).forEach(($item) => {
 });
 
 document.querySelector('#jsImage').src = myImage;
+
+const element = document.createElement('div');
+element.className = 'btn';
+element.innerHTML = 'Hello World';
+
+element.onclick = () => import('./lazy' /* webpackChunkName: 'lazy' */).then((lazy) => {
+  element.textContent = lazy.default;
+}).catch((err) => {
+  console.log(err);
+});
+
+document.body.appendChild(element);

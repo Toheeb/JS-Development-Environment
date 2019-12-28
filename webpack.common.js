@@ -12,7 +12,7 @@ module.exports = env => {
 
         output: {
             filename: "assets/js/[name].[chunkHash].js",
-            chunkFilename: '[name].[chunkHash].js',
+            chunkFilename: 'assets/js/[name].[chunkHash].js',
             path: path.resolve(__dirname, 'dist'),
         },
 
@@ -33,9 +33,9 @@ module.exports = env => {
                             loader: 'file-loader',
                             options: {
                                 esModule: false,
-                                name: 'assets/images/[name].[ext]?[hash]',
+                                name: '[name].[ext]?[hash]',
                                 // path: path.resolve(__dirname, 'dist'),
-                                // outputPath: 'assets/images'
+                                outputPath: 'assets/images'
                             }
                         }
                     ]
