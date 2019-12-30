@@ -32,8 +32,27 @@ const devConfig = {
                 test:/\.(s*)css$/,
                 use: [
                     'style-loader',
-                    'css-loader',
+                    {
+                        loader: 'css-loader',
+                        options: {
+                            sourceMap: true
+                        }
+                    },
                     'sass-loader'
+                ]
+            },
+            {
+                test: /\.(png|svg|jpe?g|gif)$/,
+                use: [
+                    {
+                        loader: 'file-loader',
+                        options: {
+                            esModule: false,
+                            name: '[name].[ext]?[hash]',
+                            // path: path.resolve(__dirname, 'dist'),
+                            outputPath: 'assets/images'
+                        }
+                    },
                 ]
             },
         ]

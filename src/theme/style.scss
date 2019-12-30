@@ -1,8 +1,17 @@
 @import "./style-color.scss";
 @import "./style-font.css";
 
+
+// Some comments to test minification
+// Some comments to test minification
+//
+
 body {
     background-color: $bgColor;
     color: $color;
     background-image: url('./../assets/image/pattern.jpg');
+}
+
+.btn {
+    color: red;
 }

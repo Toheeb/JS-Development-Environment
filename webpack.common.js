@@ -27,20 +27,6 @@ module.exports = env => {
                     ]
                 },
                 {
-                    test: /\.(png|svg|jpe?g|gif)$/,
-                    use: [
-                        {
-                            loader: 'file-loader',
-                            options: {
-                                esModule: false,
-                                name: '[name].[ext]?[hash]',
-                                // path: path.resolve(__dirname, 'dist'),
-                                outputPath: 'assets/images'
-                            }
-                        }
-                    ]
-                },
-                {
                     test: /\.html$/,
                     use: [
                         'html-loader'
@@ -56,7 +42,12 @@ module.exports = env => {
                 filename: 'index.html',
                 template: './src/index.html',
                 title: "Toheeb's Blog",
-                toheeb: 'Custom for Toheeb'
+                toheeb: 'Custom for Toheeb',
+                minify: {
+                    collapseInlineTagWhitespace: true,
+                    collapseWhitespace: true,
+                    removeComments: true,
+                }
             }),
         ]
     }
