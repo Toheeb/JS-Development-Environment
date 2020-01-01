@@ -1,4 +1,4 @@
-import './style.scss';
+import './style.css';
 import myImage from '../assets/image/Toheeb.jpg';
 
 /* eslint-disable no-console */

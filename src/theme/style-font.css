@@ -1,9 +1,12 @@
-/*
-// Some comments to test minification
-// Some comments to test minification
-//
-*/
+/** @define block-name */
+.block-name {
+    font-size: 3px;
+}
+.block-name__mod-name--val {
+    color: red;
+}
+/* @end */
 
 body {
-    font-family: Georgia, 'Times New Roman', Times, serif;
+    background-image: url('../assets/image/pattern.jpg');
 }

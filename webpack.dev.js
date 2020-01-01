@@ -29,16 +29,24 @@ const devConfig = {
     module: {
         rules: [
             {
-                test:/\.(s*)css$/,
+                test:/\.css$/,
                 use: [
-                    'style-loader',
+                    {
+                        loader: 'style-loader',
+                    },
                     {
                         loader: 'css-loader',
                         options: {
-                            sourceMap: true
+                            sourceMap: true,
+                            importLoaders: 1
                         }
                     },
-                    'sass-loader'
+                    {
+                        loader: 'postcss-loader',
+                        // options: {
+                        //     sourceMap: true
+                        // }
+                    }
                 ]
             },
             {

@@ -1,9 +1,6 @@
 const merge = require('webpack-merge');
 const commonConfig = require('./webpack.common')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
-const cssnano = require('cssnano');
-// const ImageminPlugin = require('imagemin-webpack-plugin').default;
 
 module.exports = env => {
 
@@ -25,23 +22,29 @@ const prodConfig = {
     module: {
         rules: [
             {
-                test:/\.(s*)css$/,
+                test:/\.css$/,
                 use: [
                     {
                         loader: MiniCssExtractPlugin.loader,
                         options: {
                             // Sets public path for assets inside CSS!
                             // This is prior to directories specified by filename in MiniCssExtractPlugin
-                            publicPath: './../../'
+                            publicPath: './../../',
                         }
                     },
                     {
                         loader: 'css-loader',
                         options: {
-                            sourceMap: true
+                            sourceMap: true,
+                            importLoaders: 1
                         }
                     },
-                    "sass-loader"
+                    {
+                        loader: 'postcss-loader',
+                        options: {
+                            sourceMap: true
+                        }
+                    }
                 ]
             },
             {
@@ -89,22 +92,7 @@ const prodConfig = {
         new MiniCssExtractPlugin({
             filename: 'assets/css/[name].[contentHash].css',
             chunkFilename: 'assets/css/[name].[contentHash].css'
-        }),
-        new OptimizeCSSAssetsPlugin({
-            cssProcessor: cssnano,
-            cssProcessorOptions: {
-                discardComments: {
-                    removeAll: true
-                },
-                map: {
-                    inline: false,
-                    annotation: true
-                },
-                safe: true
-            },
-            canPrint: false // False, if Bundle Analyzer will be used!
-        }),
-        // new ImageminPlugin()
+        })
     ],
 
 };
