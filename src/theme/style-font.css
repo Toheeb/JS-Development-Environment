@@ -1,12 +1,15 @@
 /** @define block-name */
+
 .block-name {
-    font-size: 3px;
+  font-size: 3px;
 }
+
 .block-name__mod-name--val {
-    color: red;
+  color: red;
 }
+
 /* @end */
 
 body {
-    background-image: url('../assets/image/pattern.jpg');
+  background-image: url('../assets/image/pattern.jpg');
 }
