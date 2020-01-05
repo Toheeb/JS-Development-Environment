@@ -23,12 +23,7 @@ module.exports = env => {
                     exclude: /node_modules/,
                     use: [
                         "babel-loader",
-                        {
-                          loader: "eslint-loader",
-                          options: {
-                            fix: true
-                          }
-                        }
+                        "eslint-loader"
                     ]
                 },
                 {
