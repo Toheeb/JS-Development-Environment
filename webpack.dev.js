@@ -1,14 +1,22 @@
 const path = require('path');
 const merge = require('webpack-merge');
 const commonConfig = require('./webpack.common');
+const SpeedMeasurePlugin = require('speed-measure-webpack-plugin');
 
+const smp = new SpeedMeasurePlugin();
 
 module.exports = env => {
 
-    return merge(commonConfig(env), devConfig);
+  const mergedConfig = merge(commonConfig(env), developmentConfig);
+
+  if ( env && env.speed === true) {
+    return smp.wrap(mergedConfig);
+  }
+
+  return mergedConfig;
 }
 
-const devConfig = {
+const developmentConfig = {
 
     mode: 'development',
 
