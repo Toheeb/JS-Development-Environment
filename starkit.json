@@ -1,0 +1,7 @@
+{
+  "entry": "theme/index.js",
+  "htmlPages": [
+    "homepage.html",
+    "index.md"
+  ]
+}
