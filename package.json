@@ -1,0 +1,21 @@
+{
+  "name": "starkit",
+  "version": "0.1.0",
+  "description": "A STARter KIT for developing simple web projects reliably",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Toheeb/JS-Development-Environment.git"
+  },
+  "author": "Toheeb Ogunbiyi",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Toheeb/JS-Development-Environment/issues"
+  },
+  "homepage": "https://github.com/Toheeb/JS-Development-Environment#readme"
+}
