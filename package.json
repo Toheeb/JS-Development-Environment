@@ -9,6 +9,7 @@
   "main": "index.js",
   "dependencies": {},
   "devDependencies": {
+    "clean-webpack-plugin": "^3.0.0",
     "editorconfig": "^0.15.3",
     "tap-spec": "^5.0.0",
     "tape": "^4.13.0",
