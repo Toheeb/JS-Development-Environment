@@ -2,11 +2,14 @@
   "name": "starkit",
   "version": "0.1.0",
   "description": "A STARter KIT for developing simple web projects reliably",
+  "scripts": {
+    "test": "node test/test.js | tap-spec"
+  },
   "main": "index.js",
   "dependencies": {},
-  "devDependencies": {},
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "devDependencies": {
+    "tap-spec": "^5.0.0",
+    "tape": "^4.13.0"
   },
   "repository": {
     "type": "git",
