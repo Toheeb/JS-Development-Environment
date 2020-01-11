@@ -1,5 +1,6 @@
 const test = require('tape');
 const fs = require('fs');
+const path = require('path');
 
 let actual, expected, message;
 
@@ -35,13 +36,10 @@ test('Editor Configuration', assert => {
 });
 
 test('Bundling of Files', assert => {
-  const memFs = require('memfs');
   const exec = require('child_process').exec;
+  const file = path.resolve(__dirname, 'test-file/index.js');
 
-  memFs.writeFileSync('/index.js', 'console.log("Hello World")');
-
-  exec('npm run build -- --env.testFile=index.js', (err, stdout, stderr) => {
-
+  exec(`npm run build -- --env.testFile=${file}`, (err, stdout, stderr) => {
     actual = true;
     expected = err ? false : true;
     message = 'Bundling should be successful';

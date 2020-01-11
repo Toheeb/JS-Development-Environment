@@ -10,7 +10,6 @@
   "dependencies": {},
   "devDependencies": {
     "editorconfig": "^0.15.3",
-    "memfs": "^3.0.3",
     "tap-spec": "^5.0.0",
     "tape": "^4.13.0",
     "webpack": "^4.41.5",
