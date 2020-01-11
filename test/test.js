@@ -23,3 +23,13 @@ test('Package files exist?', assert => {
     assert.end();
 })
 
+test('Editor Configuration', assert => {
+    const editorconfig = require('editorconfig').parseSync('./.editorconfig');
+
+    actual = true;
+    expected = Number.isInteger(editorconfig.indent_size);
+    message = 'Indentation size should be declared as a number';
+
+    assert.deepEqual(actual, expected, message);
+    assert.end();
+})
