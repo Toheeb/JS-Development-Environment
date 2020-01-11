@@ -3,12 +3,14 @@
   "version": "0.1.0",
   "description": "A STARter KIT for developing simple web projects reliably",
   "scripts": {
-    "test": "node test/test.js | tap-spec"
+    "test": "node test/test.js | tap-spec",
+    "build": "webpack"
   },
   "main": "index.js",
   "dependencies": {},
   "devDependencies": {
     "editorconfig": "^0.15.3",
+    "memfs": "^3.0.3",
     "tap-spec": "^5.0.0",
     "tape": "^4.13.0"
   },

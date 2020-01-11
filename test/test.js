@@ -6,7 +6,7 @@ let actual, expected, message;
 
 test('Package files exist?', assert => {
 
-  const files = ['package.json', '.gitignore', '.editorconfig'];
+  const files = ['package.json', '.gitignore', '.editorconfig', 'webpack.config.js'];
 
   actual = true;
   message = 'All files exist';
@@ -21,7 +21,7 @@ test('Package files exist?', assert => {
 
   assert.deepEqual(actual, expected, message);
   assert.end();
-})
+});
 
 test('Editor Configuration', assert => {
   const editorconfig = require('editorconfig').parseSync('./.editorconfig');
@@ -32,4 +32,22 @@ test('Editor Configuration', assert => {
 
   assert.deepEqual(actual, expected, message);
   assert.end();
-})
+});
+
+test('Bundling of Files', assert => {
+  const memFs = require('memfs');
+  const exec = require('child_process').exec;
+
+  memFs.writeFileSync('/index.js', 'console.log("Hello World")');
+
+  exec('npm run build -- --env.testFile=index.js', (err, stdout, stderr) => {
+
+    actual = true;
+    expected = err ? false : true;
+    message = 'Bundling should be successful';
+
+    assert.deepEqual(actual, expected, message);
+    assert.end();
+  });
+});
+
