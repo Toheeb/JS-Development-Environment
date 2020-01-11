@@ -1,0 +1,17 @@
+# editorconfig.org
+# github.com/editorconfig/editorconfig/wiki/EditorConfig-Properties
+
+# Overide other editor configurations in a nested folder
+root = true
+
+[*]
+indent_size = 2
+indent_style = space
+charset = utf-8
+trim_trailing_whitespace = true
+end_of_line = lf
+insert_final_newline = true
+max_line_length = 75
+
+[*.md]
+trim_trailing_whitespace = false
