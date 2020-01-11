@@ -12,7 +12,10 @@
     "editorconfig": "^0.15.3",
     "memfs": "^3.0.3",
     "tap-spec": "^5.0.0",
-    "tape": "^4.13.0"
+    "tape": "^4.13.0",
+    "webpack": "^4.41.5",
+    "webpack-cli": "^3.3.10",
+    "webpack-merge": "^4.2.2"
   },
   "repository": {
     "type": "git",
