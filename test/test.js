@@ -5,31 +5,31 @@ let actual, expected, message;
 
 
 test('Package files exist?', assert => {
-    
-    const files = ['package.json', '.gitignore', '.editorconfig'];
 
-    actual = true;
-    message = 'All files exist';
+  const files = ['package.json', '.gitignore', '.editorconfig'];
 
-    expected = files.every(file => {
-        if (fs.existsSync(file)) {
-            return true;
-        }
-        message = `${file} does not exists. There may be others too!`;
-        return false;
-    });
+  actual = true;
+  message = 'All files exist';
 
-    assert.deepEqual(actual, expected, message);
-    assert.end();
+  expected = files.every(file => {
+    if (fs.existsSync(file)) {
+      return true;
+    }
+    message = `${file} does not exists. There may be others too!`;
+    return false;
+  });
+
+  assert.deepEqual(actual, expected, message);
+  assert.end();
 })
 
 test('Editor Configuration', assert => {
-    const editorconfig = require('editorconfig').parseSync('./.editorconfig');
+  const editorconfig = require('editorconfig').parseSync('./.editorconfig');
 
-    actual = true;
-    expected = Number.isInteger(editorconfig.indent_size);
-    message = 'Indentation size should be declared as a number';
+  actual = true;
+  expected = Number.isInteger(editorconfig.indent_size);
+  message = 'Indentation size should be declared as a number';
 
-    assert.deepEqual(actual, expected, message);
-    assert.end();
+  assert.deepEqual(actual, expected, message);
+  assert.end();
 })
