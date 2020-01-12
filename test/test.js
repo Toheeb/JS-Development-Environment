@@ -1,6 +1,8 @@
 const test = require('tape');
 const fs = require('fs');
 const path = require('path');
+const exec = require('child_process').exec;
+const testFile = path.resolve(__dirname, 'test-file/index.js');
 
 let actual, expected, message;
 
@@ -39,10 +41,7 @@ test('Editor Configuration', assert => {
 });
 
 test('Bundling of Files', assert => {
-  const exec = require('child_process').exec;
-  const file = path.resolve(__dirname, 'test-file/index.js');
-
-  exec(`npm run build -- --env.testFile=${file}`, (err, stdout, stderr) => {
+  exec(`npm run build -- --env.testFile=${testFile}`, (err, stdout, stderr) => {
     actual = true;
     expected = err ? false : true;
     message = 'Bundling should be successful';
@@ -61,6 +60,15 @@ test('Linting', assert => {
   message = 'Linting and Editorconfig should have the same indentation size, explicitly set'
 
   assert.deepEqual(actual, expected, message);
+
+  exec(`npx esw ${testFile}`, (err, stdout, stderr) => {
+    actual = true;
+    expected = stderr ? true : false;
+    message = `Linter should throw error(s) & warning(s) because of console.log statement and a missing semicolon in line 1 of test/test-file/index.js`;
+
+    assert.deepEqual(actual, expected, message);
+  });
+
   assert.end();
 })
 
