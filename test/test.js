@@ -7,7 +7,10 @@ let actual, expected, message;
 
 test('Package files exist?', assert => {
 
-  const files = ['package.json', '.gitignore', '.editorconfig', 'webpack.config.js'];
+  const files = [
+    'package.json', '.gitignore', '.editorconfig', 'webpack.config.js',
+    '.eslintrc.js'
+  ];
 
   actual = true;
   message = 'All files exist';
@@ -48,4 +51,16 @@ test('Bundling of Files', assert => {
     assert.end();
   });
 });
+
+test('Linting', assert => {
+  const lint = require('../.eslintrc.js');
+  const editorconfig = require('editorconfig').parseSync('./.editorconfig');
+
+  actual = editorconfig.indent_size;
+  expected = (lint && lint.rules && lint.rules.indent) ? lint.rules.indent[1] : false;
+  message = 'Linting and Editorconfig should have the same indentation size, explicitly set'
+
+  assert.deepEqual(actual, expected, message);
+  assert.end();
+})
 
