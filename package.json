@@ -4,13 +4,18 @@
   "description": "A STARter KIT for developing simple web projects reliably",
   "scripts": {
     "test": "node test/test.js | tap-spec",
-    "build": "webpack"
+    "build": "webpack",
+    "lint:scripts": "esw src --color --watch"
   },
   "main": "index.js",
   "dependencies": {},
   "devDependencies": {
     "clean-webpack-plugin": "^3.0.0",
     "editorconfig": "^0.15.3",
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-plugin-import": "^2.20.0",
+    "eslint-watch": "^6.0.1",
     "speed-measure-webpack-plugin": "^1.3.1",
     "tap-spec": "^5.0.0",
     "tape": "^4.13.0",
