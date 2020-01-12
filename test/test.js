@@ -3,6 +3,9 @@ const fs = require('fs');
 const path = require('path');
 const exec = require('child_process').exec;
 const testFile = path.resolve(__dirname, 'test-file/index.js');
+const bundledFile = path.resolve(__dirname, 'bin/main.js');
+const htmlTestFile = path.resolve(__dirname, 'test-file/index.html');
+const { JSDOM } = require('jsdom');
 
 let actual, expected, message;
 
@@ -11,7 +14,7 @@ test('Package files exist?', assert => {
 
   const files = [
     'package.json', '.gitignore', '.editorconfig', 'webpack.config.js',
-    '.eslintrc.js'
+    '.eslintrc.js', '.babelrc', '.browserslistrc'
   ];
 
   actual = true;
@@ -41,13 +44,46 @@ test('Editor Configuration', assert => {
 });
 
 test('Bundling of Files', assert => {
+  assert.plan(3);
+
   exec(`npm run build -- --env.testFile=${testFile}`, (err, stdout, stderr) => {
     actual = true;
     expected = err ? false : true;
     message = 'Bundling should be successful';
 
     assert.deepEqual(actual, expected, message);
-    assert.end();
+
+    fs.readFile(bundledFile, 'utf-8', (err, data) => {
+
+      message = 'Should transpile const to var';
+      actual = true;
+      expected = false;
+
+      if (!err && data.indexOf('var changeConstToVar') !== -1) {
+        expected = true;
+      }
+
+      assert.deepEqual(actual, expected, message);
+    });
+
+    JSDOM.fromFile(htmlTestFile,{resources: 'usable', runScripts: 'dangerously'}).then(dom => {
+      setTimeout(() => {
+        global.document = dom.window.document;
+
+        const h1BeforeButtonClick = document.querySelector('h1').textContent.trim() === '' ? true : false;
+        document.querySelector('button').click();
+
+        setTimeout(() => {
+          const h1AfterButtonClick = document.querySelector('h1').textContent.trim() === 'Heading One' ? true : false;
+
+          message = 'Dynamic import of scripts should work';
+          actual = true;
+          expected = h1BeforeButtonClick && h1AfterButtonClick;
+
+          assert.deepEqual(actual, expected, message);
+        }, 5000, h1BeforeButtonClick, document)
+      }, 5000)
+    }).catch(err => console.log(err));
   });
 });
 
@@ -71,4 +107,3 @@ test('Linting', assert => {
 
   assert.end();
 })
-
