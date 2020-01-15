@@ -5,7 +5,9 @@
   "scripts": {
     "test": "node test/test.js | tap-spec",
     "build": "webpack",
-    "lint:scripts": "esw src --color --watch"
+    "lint:scripts": "esw src --color --watch",
+    "build:dev": "npm run build -- --mode=development",
+    "build:prod": "npm run build -- --mode=production"
   },
   "main": "index.js",
   "dependencies": {

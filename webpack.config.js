@@ -6,9 +6,9 @@ const SpeedMeasureWebpackPlugin = require('speed-measure-webpack-plugin');
 const smp = new SpeedMeasureWebpackPlugin();
 
 
-module.exports = env => {
+module.exports = (env, argv) => {
 
-  const config = getConfig(env);
+  const config = getConfig(env, argv);
 
   if (env && env.speed) {
     return smp.wrap(config);
@@ -18,7 +18,7 @@ module.exports = env => {
 }
 
 
-function getConfig(env) {
+function getConfig(env, argv) {
   let mainEntryFile = path.resolve(__dirname, 'src/index.js');
   let outputPath = path.resolve(__dirname, 'dist');
 
@@ -33,7 +33,7 @@ function getConfig(env) {
 
   return {
 
-    mode: 'development',
+    mode: argv.mode === 'production' ? 'production' : 'development',
 
     entry: {
       main: mainEntryFile
