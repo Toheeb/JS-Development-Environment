@@ -8,6 +8,7 @@ module.exports = {
   },
   extends: [
     'airbnb-base',
+    'plugin:compat/recommended',
   ],
   globals: {
     Atomics: 'readonly',
