@@ -22,9 +22,13 @@ function getConfig(env) {
   let mainEntryFile = path.resolve(__dirname, 'src/index.js');
   let outputPath = path.resolve(__dirname, 'dist');
 
+  // For loading dynamic assets. This should be the location of assets to the html file
+  let publicPath = '/';
+
   if (env && env.testFile) {
     mainEntryFile = env.testFile;
     outputPath = path.resolve(__dirname, 'test/bin');
+    publicPath =  '../bin/';
   }
 
   return {
@@ -37,7 +41,20 @@ function getConfig(env) {
 
     output: {
       filename: "[name].js",
-      path: outputPath
+      path: outputPath,
+      publicPath: publicPath
+    },
+
+    module: {
+      rules: [
+        {
+          test: /\.js$/,
+          exclude: /node_modules/,
+          use: [
+            'babel-loader'
+          ]
+        }
+      ]
     },
 
     plugins: [
