@@ -8,7 +8,10 @@
     "lint:scripts": "esw src --color --watch"
   },
   "main": "index.js",
-  "dependencies": {},
+  "dependencies": {
+    "core-js": "^3.6.4",
+    "regenerator-runtime": "^0.13.3"
+  },
   "devDependencies": {
     "@babel/core": "^7.8.0",
     "@babel/preset-env": "^7.8.0",
