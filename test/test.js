@@ -45,7 +45,7 @@ test('Editor Configuration', assert => {
 });
 
 test('Bundling of Files', assert => {
-  assert.plan(5);
+  assert.plan(6);
 
   exec(`npm run build:prod -- --env.testFile=${testFile}`, (err, stdout, stderr) => {
     actual = true;
@@ -80,6 +80,13 @@ test('Bundling of Files', assert => {
       expected = err ? false : true;
 
       assert.deepEqual(actual, expected, message);
+
+      message = 'Minification of html pages should not include comments in production';
+      actual = true;
+      expected = (!err && data.indexOf('<!-- Testing Minification with comments -->') === -1) ? true : false;
+
+      assert.deepEqual(actual, expected, message);
+
     })
 
     JSDOM.fromFile(htmlTestFile,{resources: 'usable', runScripts: 'dangerously'}).then(dom => {
