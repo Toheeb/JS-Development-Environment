@@ -2,6 +2,7 @@ const path = require('path');
 
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const SpeedMeasureWebpackPlugin = require('speed-measure-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const smp = new SpeedMeasureWebpackPlugin();
 
@@ -21,6 +22,7 @@ module.exports = (env, argv) => {
 function getConfig(env, argv) {
   let mainEntryFile = path.resolve(__dirname, 'src/index.js');
   let outputPath = path.resolve(__dirname, 'dist');
+  let htmlWebpackOptions = {};
 
   // For loading dynamic assets. This should be the location of assets to the html file
   let publicPath = '/';
@@ -29,6 +31,9 @@ function getConfig(env, argv) {
     mainEntryFile = env.testFile;
     outputPath = path.resolve(__dirname, 'test/bin');
     publicPath =  '../bin/';
+    htmlWebpackOptions = {
+      template: path.resolve(__dirname, 'test/test-file/index.html')
+    }
   }
 
   return {
@@ -58,7 +63,8 @@ function getConfig(env, argv) {
     },
 
     plugins: [
-      new CleanWebpackPlugin()
+      new CleanWebpackPlugin(),
+      new HtmlWebpackPlugin(htmlWebpackOptions)
     ]
   }
 }
