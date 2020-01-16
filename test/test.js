@@ -44,7 +44,7 @@ test('Editor Configuration', assert => {
 });
 
 test('Bundling of Files', assert => {
-  assert.plan(3);
+  assert.plan(4);
 
   exec(`npm run build -- --env.testFile=${testFile}`, (err, stdout, stderr) => {
     actual = true;
@@ -62,6 +62,12 @@ test('Bundling of Files', assert => {
       if (!err && data.indexOf('var changeConstToVar') !== -1) {
         expected = true;
       }
+
+      assert.deepEqual(actual, expected, message);
+
+      message = 'Minification should not include comments in production';
+      actual = true;
+      expected = (!err && data.indexOf('// Testing Dynamic Imports') === -1) ? true : false;
 
       assert.deepEqual(actual, expected, message);
     });
