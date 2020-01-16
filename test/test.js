@@ -46,7 +46,7 @@ test('Editor Configuration', assert => {
 test('Bundling of Files', assert => {
   assert.plan(4);
 
-  exec(`npm run build -- --env.testFile=${testFile}`, (err, stdout, stderr) => {
+  exec(`npm run build:prod -- --env.testFile=${testFile}`, (err, stdout, stderr) => {
     actual = true;
     expected = err ? false : true;
     message = 'Bundling should be successful';
@@ -59,7 +59,7 @@ test('Bundling of Files', assert => {
       actual = true;
       expected = false;
 
-      if (!err && data.indexOf('var changeConstToVar') !== -1) {
+      if (!err && data.indexOf('const ') === -1) {
         expected = true;
       }
 
