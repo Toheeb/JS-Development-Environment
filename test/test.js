@@ -4,6 +4,7 @@ const path = require('path');
 const exec = require('child_process').exec;
 const testFile = path.resolve(__dirname, 'test-file/index.js');
 const bundledFile = path.resolve(__dirname, 'bin/main.js');
+const bundledHTMLFile = path.resolve(__dirname, 'bin/index.html');
 const htmlTestFile = path.resolve(__dirname, 'test-file/index.html');
 const { JSDOM } = require('jsdom');
 
@@ -44,7 +45,7 @@ test('Editor Configuration', assert => {
 });
 
 test('Bundling of Files', assert => {
-  assert.plan(4);
+  assert.plan(5);
 
   exec(`npm run build:prod -- --env.testFile=${testFile}`, (err, stdout, stderr) => {
     actual = true;
@@ -71,6 +72,15 @@ test('Bundling of Files', assert => {
 
       assert.deepEqual(actual, expected, message);
     });
+
+    fs.readFile(bundledHTMLFile, 'utf-8', (err, data) => {
+
+      message = 'Can generate html pages';
+      actual = true;
+      expected = err ? false : true;
+
+      assert.deepEqual(actual, expected, message);
+    })
 
     JSDOM.fromFile(htmlTestFile,{resources: 'usable', runScripts: 'dangerously'}).then(dom => {
       setTimeout(() => {
