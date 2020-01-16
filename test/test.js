@@ -5,7 +5,6 @@ const exec = require('child_process').exec;
 const testFile = path.resolve(__dirname, 'test-file/index.js');
 const bundledFile = path.resolve(__dirname, 'bin/main.js');
 const bundledHTMLFile = path.resolve(__dirname, 'bin/index.html');
-const htmlTestFile = path.resolve(__dirname, 'test-file/index.html');
 const { JSDOM } = require('jsdom');
 
 let actual, expected, message;
@@ -89,7 +88,7 @@ test('Bundling of Files', assert => {
 
     })
 
-    JSDOM.fromFile(htmlTestFile,{resources: 'usable', runScripts: 'dangerously'}).then(dom => {
+    JSDOM.fromFile(bundledHTMLFile, {resources: 'usable', runScripts: 'dangerously'}).then(dom => {
       setTimeout(() => {
         global.document = dom.window.document;
 
