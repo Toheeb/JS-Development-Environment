@@ -4,8 +4,12 @@ console.log('Linter should throw warning for this console statement and error fo
 const changeConstToVar = true;
 
 // Testing Dynamic Imports
-document.querySelector('#button').addEventListener('click', () => {
-  import('./dependency').then(obj => {
-    document.querySelector('h1').textContent = obj.h1;
+const button = document.querySelector('#button');
+
+if (button) {
+  button.addEventListener('click', () => {
+    import('./dependency').then(obj => {
+      document.querySelector('h1').textContent = obj.h1;
+    });
   });
-})
+}

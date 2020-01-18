@@ -94,11 +94,18 @@ test('Bundling of Files', assert => {
       setTimeout(() => {
         global.document = dom.window.document;
 
-        const h1BeforeButtonClick = document.querySelector('h1').textContent.trim() === '' ? true : false;
-        document.querySelector('button').click();
+        const h1BeforeButtonClickNode = document.querySelector('h1');
+        const h1BeforeButtonClick = (h1BeforeButtonClickNode && h1BeforeButtonClickNode.textContent.trim() === '') ? true : false;
+
+        const button = document.querySelector('button');
+
+        if (button) {
+          button.click()
+        };
 
         setTimeout(() => {
-          const h1AfterButtonClick = document.querySelector('h1').textContent.trim() === 'Heading One' ? true : false;
+          const h1AfterButtonClickNode = document.querySelector('h1');
+          const h1AfterButtonClick = (h1AfterButtonClickNode && h1AfterButtonClickNode.textContent.trim() === 'Heading One') ? true : false;
 
           message = 'Dynamic import of scripts should work';
           actual = true;
