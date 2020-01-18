@@ -1,0 +1,5 @@
+{
+  "productionDir": "dist",
+  "developmentDir": "src",
+  "entry": "./index.js"
+}

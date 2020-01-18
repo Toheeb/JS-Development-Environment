@@ -20,18 +20,14 @@ module.exports = (env, argv) => {
 
 
 function getConfig(env, argv) {
-  let mainEntryFile = path.resolve(__dirname, 'src/index.js');
-  let outputPath = path.resolve(__dirname, 'dist');
+
+  const testMode = env && env.testFile;
+  const settings = testMode ? require('./test/.starkitrc.json') : require('./.starkitrc.json');
+
   let htmlFile = '';
   let htmlWebpackOptions = {};
 
-  // For loading dynamic assets. This should be the location of assets to the html file
-  let publicPath = '/';
-
-  if (env && env.testFile) {
-    mainEntryFile = env.testFile;
-    outputPath = path.resolve(__dirname, 'test/bin');
-    publicPath =  '../bin/';
+  if (testMode) {
     htmlFile = path.resolve(__dirname, 'test/test-file/index.pug');
   }
 
@@ -66,14 +62,11 @@ function getConfig(env, argv) {
 
     mode: argv.mode === 'production' ? 'production' : 'development',
 
-    entry: {
-      main: mainEntryFile
-    },
+    context: path.resolve(__dirname, settings.developmentDir),
+    entry: settings.entry,
 
     output: {
-      filename: "[name].js",
-      path: outputPath,
-      publicPath: publicPath
+      path: path.resolve(__dirname, settings.productionDir)
     },
 
     module: {
