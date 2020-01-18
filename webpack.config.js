@@ -22,6 +22,7 @@ module.exports = (env, argv) => {
 function getConfig(env, argv) {
   let mainEntryFile = path.resolve(__dirname, 'src/index.js');
   let outputPath = path.resolve(__dirname, 'dist');
+  let htmlFile = '';
   let htmlWebpackOptions = {};
 
   // For loading dynamic assets. This should be the location of assets to the html file
@@ -31,8 +32,19 @@ function getConfig(env, argv) {
     mainEntryFile = env.testFile;
     outputPath = path.resolve(__dirname, 'test/bin');
     publicPath =  '../bin/';
+    htmlFile = path.resolve(__dirname, 'test/test-file/index.pug');
+  }
+
+  const fileExtension = path.extname(htmlFile);
+
+  // Doesn't cater for cases with file not available
+  if (fileExtension == '.pug') {
     htmlWebpackOptions = {
-      template: path.resolve(__dirname, 'test/test-file/index.pug')
+      template: 'pug-loader!' + htmlFile,
+    }
+  } else if (fileExtension == '.html') {
+    htmlWebpackOptions = {
+      template: htmlFile
     }
   }
 
