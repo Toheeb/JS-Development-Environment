@@ -36,6 +36,20 @@ function getConfig(env, argv) {
     }
   }
 
+  if (argv.mode === 'production') {
+    htmlWebpackOptions['minify'] = {
+      collapseWhitespace: true,
+      collapseInlineTagWhitespace: true,
+      minifyCSS: true,
+      minifyJS: true,
+      removeComments: true,
+      removeRedundantAttributes: true,
+      removeScriptTypeAttributes: true,
+      removeStyleLinkTypeAttributes: true,
+      useShortDoctype: true
+    }
+  }
+
   return {
 
     mode: argv.mode === 'production' ? 'production' : 'development',
