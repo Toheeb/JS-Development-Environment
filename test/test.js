@@ -74,15 +74,17 @@ test('Bundling of Files', assert => {
 
     fs.readFile(bundledHTMLFile, 'utf-8', (err, data) => {
 
-      message = 'Can generate html pages';
+      const isValidHtml = (!err && data.trim().endsWith('</body></html>')) ? true : false;
+
+      message = 'Can generate valid html pages';
       actual = true;
-      expected = err ? false : true;
+      expected = isValidHtml;
 
       assert.deepEqual(actual, expected, message);
 
       message = 'Minification of html pages should not include comments in production';
       actual = true;
-      expected = (!err && data.indexOf('<!-- Testing Minification with comments -->') === -1) ? true : false;
+      expected = (isValidHtml && data.indexOf('<!-- Testing Minification with comments -->') === -1) ? true : false;
 
       assert.deepEqual(actual, expected, message);
 
