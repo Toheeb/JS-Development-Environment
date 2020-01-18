@@ -32,7 +32,7 @@ function getConfig(env, argv) {
     outputPath = path.resolve(__dirname, 'test/bin');
     publicPath =  '../bin/';
     htmlWebpackOptions = {
-      template: path.resolve(__dirname, 'test/test-file/index.html')
+      template: path.resolve(__dirname, 'test/test-file/index.pug')
     }
   }
 
