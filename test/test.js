@@ -14,7 +14,7 @@ test('Package files exist?', assert => {
 
   const files = [
     'package.json', '.gitignore', '.editorconfig', 'webpack.config.js',
-    '.eslintrc.js', '.babelrc', '.browserslistrc'
+    '.eslintrc.js', '.babelrc', '.browserslistrc', '.starkitrc.json'
   ];
 
   actual = true;
