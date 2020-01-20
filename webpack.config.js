@@ -21,42 +21,10 @@ module.exports = (env, argv) => {
 
 function getConfig(env, argv) {
 
+  const mode = argv.mode;
   const testMode = env && env.testFile;
   const settings = testMode ? require('./test/.starkitrc.json') : require('./.starkitrc.json');
-
-  let htmlFile = '';
-  let htmlWebpackOptions = {};
-
-  if (testMode) {
-    htmlFile = path.resolve(__dirname, 'test/test-file/index.pug');
-  }
-
-  const fileExtension = path.extname(htmlFile);
-
-  // Doesn't cater for cases with file not available
-  if (fileExtension == '.pug') {
-    htmlWebpackOptions = {
-      template: 'pug-loader!' + htmlFile,
-    }
-  } else if (fileExtension == '.html') {
-    htmlWebpackOptions = {
-      template: htmlFile
-    }
-  }
-
-  if (argv.mode === 'production') {
-    htmlWebpackOptions['minify'] = {
-      collapseWhitespace: true,
-      collapseInlineTagWhitespace: true,
-      minifyCSS: true,
-      minifyJS: true,
-      removeComments: true,
-      removeRedundantAttributes: true,
-      removeScriptTypeAttributes: true,
-      removeStyleLinkTypeAttributes: true,
-      useShortDoctype: true
-    }
-  }
+  const htmlPagePlugins = getHtmlPages(settings, mode);
 
   return {
 
@@ -83,7 +51,39 @@ function getConfig(env, argv) {
 
     plugins: [
       new CleanWebpackPlugin(),
-      new HtmlWebpackPlugin(htmlWebpackOptions)
+      ...htmlPagePlugins
     ]
   }
+}
+
+
+function getHtmlPages({htmlPages = {}}, mode) {
+  const filenames = Object.keys(htmlPages);
+
+  return filenames.map(filename => {
+    const extension = path.extname(filename);
+    if (extension !== '.html') {
+      console.log('Error: ')
+      console.log(`The file type "${extension}" is not supported in htmlPages: .starkitrc.json`);
+      process.exit(1);
+    }
+    const {chunks} = htmlPages[filename];
+
+    return new HtmlWebpackPlugin({
+      filename: filename,
+      chunks: chunks,
+      template: filename,
+      minify: (mode === 'production') ? {
+        collapseWhitespace: true,
+        collapseInlineTagWhitespace: true,
+        minifyCSS: true,
+        minifyJS: true,
+        removeComments: true,
+        removeRedundantAttributes: true,
+        removeScriptTypeAttributes: true,
+        removeStyleLinkTypeAttributes: true,
+        useShortDoctype: true
+      } : false
+    })
+  });
 }

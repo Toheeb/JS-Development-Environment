@@ -1,5 +1,8 @@
 {
   "productionDir": "test/bin",
   "developmentDir": "test/test-file",
-  "entry": "./index.js"
+  "entry": "./index.js",
+  "htmlPages": {
+    "index.html": {}
+  }
 }
