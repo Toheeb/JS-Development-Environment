@@ -47,8 +47,10 @@ test('Bundling of Files', assert => {
   assert.plan(6);
 
   exec(`npm run build:prod -- --env.testFile=${testFile}`, (err, stdout, stderr) => {
+
+    const canBundle = err ? false : true;
     actual = true;
-    expected = err ? false : true;
+    expected = canBundle;
     message = 'Bundling should be successful';
 
     assert.deepEqual(actual, expected, message);
@@ -59,7 +61,7 @@ test('Bundling of Files', assert => {
       actual = true;
       expected = false;
 
-      if (!err && data.indexOf('const ') === -1) {
+      if (canBundle && !err && data.indexOf('const ') === -1) {
         expected = true;
       }
 
@@ -74,7 +76,7 @@ test('Bundling of Files', assert => {
 
     fs.readFile(bundledHTMLFile, 'utf-8', (err, data) => {
 
-      const isValidHtml = (!err && data.trim().endsWith('</body></html>')) ? true : false;
+      const isValidHtml = (canBundle && !err && data.trim().endsWith('</body></html>')) ? true : false;
 
       message = 'Can generate valid html pages';
       actual = true;
@@ -97,7 +99,7 @@ test('Bundling of Files', assert => {
         const h1BeforeButtonClickNode = document.querySelector('h1');
         const h1BeforeButtonClick = (h1BeforeButtonClickNode && h1BeforeButtonClickNode.textContent.trim() === '') ? true : false;
 
-        const button = document.querySelector('button');
+        const button = document.querySelector('#button');
 
         if (button) {
           button.click()
@@ -109,7 +111,7 @@ test('Bundling of Files', assert => {
 
           message = 'Dynamic import of scripts should work';
           actual = true;
-          expected = h1BeforeButtonClick && h1AfterButtonClick;
+          expected = canBundle && h1BeforeButtonClick && h1AfterButtonClick;
 
           assert.deepEqual(actual, expected, message);
         }, 5000, h1BeforeButtonClick, document)
