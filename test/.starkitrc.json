@@ -3,6 +3,8 @@
   "developmentDir": "test/test-file",
   "entry": "./index.js",
   "htmlPages": {
-    "index.html": {}
+    "index.md": {
+      "template": "./index.pug"
+    }
   }
 }
