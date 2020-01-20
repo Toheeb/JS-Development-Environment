@@ -3,6 +3,10 @@ const path = require('path');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const SpeedMeasureWebpackPlugin = require('speed-measure-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const fs = require('fs');
+
+const md = require('markdown-it')('commonmark');
+const frontmatter = require('front-matter');
 
 const smp = new SpeedMeasureWebpackPlugin();
 
@@ -57,19 +61,19 @@ function getConfig(env, argv) {
 }
 
 
-function getHtmlPages({htmlPages = {}}, mode) {
+function getHtmlPages({htmlPages = {}, developmentDir}, mode) {
   const filenames = Object.keys(htmlPages);
 
   return filenames.map(filename => {
     const extension = path.extname(filename);
-    if (extension !== '.html') {
+    if (['.html', '.md'].includes(extension) === false) {
       console.log('Error: ')
       console.log(`The file type "${extension}" is not supported in htmlPages: .starkitrc.json`);
       process.exit(1);
     }
     const {chunks} = htmlPages[filename];
 
-    return new HtmlWebpackPlugin({
+    const options = {
       filename: filename,
       chunks: chunks,
       template: filename,
@@ -84,6 +88,19 @@ function getHtmlPages({htmlPages = {}}, mode) {
         removeStyleLinkTypeAttributes: true,
         useShortDoctype: true
       } : false
-    })
+    };
+
+    if (extension === '.md') {
+      const mdFile = fs.readFileSync(path.resolve(__dirname, developmentDir, `${filename}`), 'utf-8')
+      const markdownOptions = frontmatter(mdFile);
+      options['filename'] = `${filename.slice(0, (extension.length * -1))}.html`;
+      options['template'] = `pug-loader!${path.resolve(__dirname, developmentDir, htmlPages[filename]['template'])}`;
+      options['templateParameters'] = {
+        marked: md.render(markdownOptions.body),
+        ...markdownOptions.attributes
+      }
+    }
+
+    return new HtmlWebpackPlugin(options);
   });
 }

@@ -4,7 +4,7 @@
   "entry": "./index.js",
   "htmlPages": {
     "index.md": {
-      "template": "./index.pug"
+      "template": "index.pug"
     }
   }
 }
