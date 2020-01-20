@@ -6,7 +6,9 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const fs = require('fs');
 
 const md = require('markdown-it')('commonmark');
+const mdAttrs = require('markdown-it-attrs');
 const frontmatter = require('front-matter');
+md.use(mdAttrs, {allowedAttributes: ['id', 'class', /^data-.*$/]});
 
 const smp = new SpeedMeasureWebpackPlugin();
 
