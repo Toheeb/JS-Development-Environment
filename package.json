@@ -4,10 +4,9 @@
   "description": "A STARter KIT for developing simple web projects reliably",
   "scripts": {
     "test": "node test/test.js | tap-spec",
-    "build": "webpack",
     "lint:scripts": "esw src --color --watch",
-    "build:dev": "npm run build -- --mode=development",
-    "build:prod": "npm run build -- --mode=production"
+    "build:dev": "webpack-dev-server --mode development --hot --inline",
+    "build:prod": "webpack --mode=production"
   },
   "main": "index.js",
   "dependencies": {
@@ -37,6 +36,7 @@
     "tape": "^4.13.0",
     "webpack": "^4.41.5",
     "webpack-cli": "^3.3.10",
+    "webpack-dev-server": "^3.10.1",
     "webpack-merge": "^4.2.2"
   },
   "repository": {

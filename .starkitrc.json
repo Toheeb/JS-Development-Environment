@@ -1,5 +1,8 @@
 {
   "productionDir": "dist",
   "developmentDir": "src",
-  "entry": "./index.js"
+  "entry": "./index.js",
+  "htmlPages": {
+    "index.html": {}
+  }
 }

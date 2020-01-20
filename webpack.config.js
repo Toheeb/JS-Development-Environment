@@ -43,6 +43,13 @@ function getConfig(env, argv) {
       path: path.resolve(__dirname, settings.productionDir)
     },
 
+    devServer: {
+      stats: {
+        children: false,
+        maxModules: 0,
+      }
+    },
+
     module: {
       rules: [
         {
