@@ -1,3 +1,7 @@
+:root {
+  --mainColor: rgba(255,0,0,0.1);
+}
+
 body {
-  background-color: red;
+  background-color: var(--mainColor);
 }
