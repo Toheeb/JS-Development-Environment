@@ -1,3 +1,5 @@
+import './style.css';
+
 console.log('Linter should throw warning for this console statement and error for missing semicolon')
 
 // Testing Transpiling by changing the declaration

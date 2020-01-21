@@ -5,6 +5,7 @@ const exec = require('child_process').exec;
 const testFile = path.resolve(__dirname, 'test-file/index.js');
 const bundledFile = path.resolve(__dirname, 'bin/main.js');
 const bundledHTMLFile = path.resolve(__dirname, 'bin/index.html');
+const bundledCSSFile = path.resolve(__dirname, 'bin/main.css');
 const { JSDOM } = require('jsdom');
 
 let actual, expected, message;
@@ -44,7 +45,7 @@ test('Editor Configuration', assert => {
 });
 
 test('Bundling of Files', assert => {
-  assert.plan(6);
+  assert.plan(7);
 
   exec(`npm run build:prod -- --env.testFile=${testFile}`, (err, stdout, stderr) => {
 
@@ -90,7 +91,15 @@ test('Bundling of Files', assert => {
 
       assert.deepEqual(actual, expected, message);
 
-    })
+    });
+
+    fs.readFile(bundledCSSFile, 'utf-8', (err, data) => {
+      message = 'Can generate CSS Page';
+      actual = true;
+      expected = err ? false : true;
+
+      assert.deepEqual(actual, expected, message);
+    });
 
     JSDOM.fromFile(bundledHTMLFile, {resources: 'usable', runScripts: 'dangerously'}).then(dom => {
       setTimeout(() => {
