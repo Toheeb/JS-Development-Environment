@@ -138,7 +138,7 @@ function resolveCSS(mode) {
     loaders.push('style-loader');
   }
 
-  loaders.push('css-loader');
+  loaders.push('css-loader', 'postcss-loader');
 
   return {
     loaders,
