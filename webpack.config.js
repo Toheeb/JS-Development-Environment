@@ -58,13 +58,21 @@ function getConfig(env, argv) {
           use: [
             'babel-loader'
           ]
+        },
+        {
+          test: /\.css$/,
+          exclude: /node_modules/,
+          use: [
+            ...resolveCSS(mode).loaders
+          ]
         }
       ]
     },
 
     plugins: [
       new CleanWebpackPlugin(),
-      ...htmlPagePlugins
+      ...htmlPagePlugins,
+      ...resolveCSS(mode).plugins
     ]
   }
 }
@@ -112,4 +120,28 @@ function getHtmlPages({htmlPages = {}, developmentDir}, mode) {
 
     return new HtmlWebpackPlugin(options);
   });
+}
+
+function resolveCSS(mode) {
+  const loaders = [];
+  const plugins = [];
+
+  if (mode === 'production') {
+    const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+
+    loaders.push(MiniCssExtractPlugin.loader);
+    plugins.push(new MiniCssExtractPlugin({
+      filename: '[name].css',
+      chunkFilename: '[name].css'
+    }));
+  } else {
+    loaders.push('style-loader');
+  }
+
+  loaders.push('css-loader');
+
+  return {
+    loaders,
+    plugins
+  }
 }

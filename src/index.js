@@ -1,3 +1,5 @@
+import './style.css';
+
 console.log('From src/index.js');
 
 const arr = [1, 2, 3];
