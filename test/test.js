@@ -45,7 +45,7 @@ test('Editor Configuration', assert => {
 });
 
 test('Bundling of Files', assert => {
-  assert.plan(7);
+  assert.plan(8);
 
   exec(`npm run build:prod -- --env.testFile=${testFile}`, (err, stdout, stderr) => {
 
@@ -97,6 +97,12 @@ test('Bundling of Files', assert => {
       message = 'Can generate CSS Page';
       actual = true;
       expected = err ? false : true;
+
+      assert.deepEqual(actual, expected, message);
+
+      message = 'Minification of css pages should not include comments in production';
+      actual = true;
+      expected = (data && !data.includes('/* @define componentName */')) ? true : false;
 
       assert.deepEqual(actual, expected, message);
     });
