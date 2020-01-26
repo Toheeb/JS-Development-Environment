@@ -138,7 +138,15 @@ function resolveCSS(mode) {
     loaders.push('style-loader');
   }
 
-  loaders.push('css-loader', 'postcss-loader');
+  loaders.push(
+    {
+      loader: 'css-loader',
+      options: {
+        importLoaders: 1,
+      }
+    },
+    'postcss-loader'
+  );
 
   return {
     loaders,
