@@ -45,7 +45,7 @@ test('Editor Configuration', assert => {
 });
 
 test('Bundling of Files', assert => {
-  assert.plan(8);
+  assert.plan(9);
 
   exec(`npm run build:prod -- --env.testFile=${testFile}`, (err, stdout, stderr) => {
 
@@ -53,6 +53,21 @@ test('Bundling of Files', assert => {
     actual = true;
     expected = canBundle;
     message = 'Bundling should be successful';
+
+    assert.deepEqual(actual, expected, message);
+
+    // Test if images can be loaded from html, css, and javascript
+    const images = ['fromHtml.jpg', 'fromCSS.png', 'fromJS.gif'];
+
+    message = 'Images can be bundled';
+    actual = true;
+    expected = images.every(image => {
+      if (fs.existsSync(image)) {
+        return true;
+      }
+
+      message = `${image} image can't be loaded. There may be others too`;
+    });
 
     assert.deepEqual(actual, expected, message);
 
